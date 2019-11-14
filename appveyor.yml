@@ -12,5 +12,10 @@ install:
   - set PATH=c:\projects\boost153;%PATH%
   - 7z a archive.7z -r c:\projects\boost153\
 
-  
+after_build:
+- ps: |
+    appveyor PushArtifact archive.7z
+
+cache:
+ - archive.7z -> appveyor.yml  
   
