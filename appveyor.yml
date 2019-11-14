@@ -1,0 +1,15 @@
+os: Windows Server 2012 R2
+
+platform:
+ - x86
+
+install:
+  - ps: (new-object System.Net.WebClient).Downloadfile("http://www.7-zip.org/a/7z1514-x64.exe", "c:\projects\7zip_installer.exe")
+  - c:\projects\7zip_installer.exe /S /D=c:\projects\7zip_tool
+  - set PATH=c:\projects\7zip_tool;%PATH%
+  - ps: (new-object System.Net.WebClient).Downloadfile("https://boost.teeks99.com/bin/boost_1_53_0-msvc-8.0-32.exe", "c:\projects\boost_installer.exe")
+  - c:\projects\boost_installer.exe /S /D=c:\projects\boost153
+  - set PATH=c:\projects\boost153;%PATH%
+
+  
+  
