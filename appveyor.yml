@@ -10,11 +10,17 @@ install:
   - ps: (new-object System.Net.WebClient).Downloadfile("https://boost.teeks99.com/bin/boost_1_53_0-msvc-8.0-32.exe", "c:\projects\boost_installer.exe")
   - c:\projects\boost_installer.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /D=c:\projects\boost153
   - set PATH=c:\projects\boost153;%PATH%
-  - 7z a archive.7z -r c:\projects\boost153\
 
+
+# scripts to run after build
 after_build:
-- ps: |
-    appveyor PushArtifact archive.7z
+  # zip the build archive
+  - tree /F "c:\projects\boost153"
+  - 7z a archive.7z "c:\projects\boost153"
+  - ps: |
+      appveyor PushArtifact archive.7z
+
+
 
 cache:
  - archive.7z -> appveyor.yml  
